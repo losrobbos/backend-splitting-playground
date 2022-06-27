@@ -17,16 +17,13 @@ const todos = [
   { _id: "t3", text: "Let's make an extended break soon", userId: "u2" },
 ]
 
-// ALLOW FRONTENDs ON OTHER PORT TO CONNECT TO US + SENDING COOKIES ALONG 
-
-// app.use( cors() ) // => allows access from EVERYONE !!!! http://localhost:3000 http://google.com
-
 app.use( cors()) // allow access just from specific Frontend URL => requirement for sending cookies!
 
 // REGISTER MIDDLEWARE
 app.use( express.json() ) // parse incoming bodies => req.body
 
 
+// HOME ROUTE
 app.get('/', (req, res) => {
   res.send(`<h2>Authentication - Let's check it out, bro...</h2>`);
 });
@@ -45,13 +42,9 @@ app.post('/login', (req, res, next) => {
   }
 
   // sign => create a ticket
-  // verify => check if ticket is valid!
   let token = jwt.sign( userFound, JWT_SECRET, { expiresIn: '3m' } )
-  // ==> eywhwhaza292kaja => box: { eykwkwkwiw } => send this box to frontend
 
-  // place token in headers
-  res.set("token", token) // attach the ticket to a cookie in the response
-
+  // return user data + token merged
   res.json( { ...userFound, token } )
 })
 
