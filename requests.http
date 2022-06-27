@@ -1,0 +1,16 @@
+@API_URL = http://localhost:5000
+
+### Login
+POST {{API_URL}}/login
+Content-Type: application/json
+
+{
+  "name": "Mo",
+  "pw": "mo123"
+}
+
+### Users
+GET {{API_URL}}/users
+
+### User Todos
+GET {{API_URL}}/todos
